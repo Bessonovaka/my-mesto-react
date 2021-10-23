@@ -21,8 +21,9 @@ function Main(props) {
             </section>
 
             <section className="photo-grid">
+                
             {props.cards.map((card, i) => (
-                <Card key={i} src={card.link} description={card.name} onCardClick={props.onCardClick} card={card}/>
+                <Card key={i} src={card.link} description={card.name} like={card.like} onCardClick={props.onCardClick} card={card}/>
             ))}            
         </section>
         </main>
