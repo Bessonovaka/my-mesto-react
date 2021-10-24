@@ -20,7 +20,6 @@ function PopupWithForm(props) {
                   placeholder={props.placeholder1}
                   required
                   minLength="2"
-                  maxLength="40"
                   onChange={props.onChange}
                 />
                 <span className="form__input-error name-error"></span>
@@ -34,7 +33,6 @@ function PopupWithForm(props) {
                   placeholder={props.placeholder2}
                   required
                   minLength="2"
-                  maxLength="200"
                   onChange={props.onChange}
                 />
                 <span className="form__input-error profession-error"></span>
