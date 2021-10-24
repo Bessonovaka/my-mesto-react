@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
 
 function App() {
   const [initialCards, setCards] = React.useState([
@@ -45,14 +46,23 @@ function App() {
     }
   ]);
 
+  const [currentUser, setUserInfo] = React.useState({
+    name: 'Жак-Ив Кусто',
+    profession: 'Исследователь океана'
+  });
+
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isBigPhotoPopupOpen, setBigPhotoPopupOpen] = React.useState(false);
   const [selectedPhoto, setSelectedCard] = React.useState({});
 
+  // контекст
+  const CurrentUserContext = React.createContext(currentUser);
+
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
   };
+
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
   };
@@ -70,13 +80,19 @@ function App() {
     setCards([...newList]);
   }
 
+  function handleUpdateUser(info) {
+    setUserInfo(info);
+  }
+
   return (
     <div className="page">
-      <PopupWithForm name="edit-profile" title="Редактировать профиль" placeholder1="Жак-Ив Кусто" placeholder2="Исследователь океана" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+      <CurrentUserContext.Provider value={currentUser}>
+      <EditProfilePopup onClose={closeAllPopups} onUpdateUser={handleUpdateUser} currentUser={currentUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+      </CurrentUserContext.Provider>
       <PopupWithForm name="create-card" title="Новое место" placeholder1="Название" placeholder2="Ссылка на картинку" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
       <ImagePopup isOpen={isBigPhotoPopupOpen} onClose={closeAllPopups} card={selectedPhoto} />
       <Header />
-      <Main cards={initialCards} handleDeleteClick={handleDeleteClick} onEditAvatar={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handlePhotoClick} onClose={closeAllPopups} />
+      <Main cards={initialCards} handleDeleteClick={handleDeleteClick} currentUser={currentUser} onEditAvatar={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handlePhotoClick} onClose={closeAllPopups} />
       <Footer />
     </div>
   );

@@ -14,9 +14,9 @@ function Main(props) {
                     className="profile__avatar"
                 />
                 <div className="profile__info">
-                    <h1 className="profile__title">Жак-Ив Кусто</h1>
+                    <h1 className="profile__title">{props.currentUser.name}</h1>
                     <button className="edit-button" onClick={props.onEditAvatar}></button>
-                    <p className="profile__subtitle">Исследователь океана</p>
+                    <p className="profile__subtitle">{props.currentUser.profession}</p>
                 </div>
                 <button className="add-button" onClick={props.onAddPlace}></button>
             </section>

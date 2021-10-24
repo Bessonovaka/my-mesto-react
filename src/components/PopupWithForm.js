@@ -1,4 +1,8 @@
+import React from 'react';
+
 function PopupWithForm(props) {    
+  
+
     return(
         <div className={`popup popup-${props.name} ${props.isOpen && 'popup_opened'}`}>
         <form
@@ -17,6 +21,7 @@ function PopupWithForm(props) {
                   required
                   minLength="2"
                   maxLength="40"
+                  onChange={props.onChange}
                 />
                 <span className="form__input-error name-error"></span>
               </label>
@@ -30,10 +35,11 @@ function PopupWithForm(props) {
                   required
                   minLength="2"
                   maxLength="200"
+                  onChange={props.onChange}
                 />
                 <span className="form__input-error profession-error"></span>
               </label>
-              <button className="popup__button submit-button form__submit">
+              <button className="popup__button submit-button form__submit" onClick={props.handleSubmit}>
                 Сохранить
               </button>
             </fieldset>
