@@ -4,12 +4,13 @@ import Card from './Card';
 
 function Main(props) {
     
+
     return (
         <main className="main">
             <section className="profile">
                 <img
                     src={avatar}
-                    alt="Photo"
+                    alt="avatar"
                     className="profile__avatar"
                 />
                 <div className="profile__info">
@@ -21,11 +22,11 @@ function Main(props) {
             </section>
 
             <section className="photo-grid">
-                
-            {props.cards.map((card, i) => (
-                <Card key={i} src={card.link} description={card.name} like={card.like} onCardClick={props.onCardClick} card={card}/>
-            ))}            
-        </section>
+
+                {props.cards.map((card, i) => (
+                    <Card key={i} deleteCard={card.id} handleDeleteClick={props.handleDeleteClick} src={card.link} description={card.name} like={card.like} onCardClick={props.onCardClick} card={card} />
+                ))}
+            </section>
         </main>
     )
 }
